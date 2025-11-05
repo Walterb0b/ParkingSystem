@@ -1,6 +1,7 @@
 package main;
 
 import states.ClosedState;
+import states.EntryOnlyState;
 import states.GateState;
 import util.ParkingValidator;
 
@@ -19,12 +20,12 @@ public class ParkingGate {
     }
 
 
-    public void addCar(Car c){
-        ParkingValidator.validateCar(c, parkedCars, capacity);
+    public void registerEntry(Car c){
+        ParkingValidator.validateEntry(c, parkedCars, capacity);
         parkedCars.add(c);
     }
 
-    public void removeCar(Car c){
+    public void registerExit(Car c){
         ParkingValidator.validateExit(c, parkedCars);
         parkedCars.remove(c);
     }
@@ -40,5 +41,9 @@ public class ParkingGate {
     public String getState() {
         String state = this.state.getClass().getSimpleName();
         return "The parking gate state is: " + state;
+    }
+
+    public void setState(GateState entryOnlyState) {
+        this.state = entryOnlyState;
     }
 }

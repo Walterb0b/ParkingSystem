@@ -6,23 +6,25 @@ import java.util.List;
 
 public class ParkingValidator {
     
-    public static void validateCar(Car car, List<Car> parkedCars, int capacity){
+    public static void validateEntry(Car car, List<Car> parkedCars, int capacity){
+        requireNonNullCar(car);
         validateNumberplate(car.getNumberplate());
         validateCapacity(parkedCars, capacity);
-        validateNotParkedAlready(car, parkedCars);
+        ensureNotParked(car, parkedCars);
     }
 
     public static void validateExit(Car car, List<Car> parkedCars){
+        requireNonNullCar(car);
         validateNumberplate(car.getNumberplate());
-        validateExitCarRegistered(car, parkedCars);
+        ensureIsParked(car, parkedCars);
     }
 
-    public static void validateNotParkedAlready(Car car, List<Car> parkedCars){
+    public static void ensureNotParked(Car car, List<Car> parkedCars){
         if(parkedCars.contains(car))
             throw new ParkingGateException("Car is already parked!");
     }
 
-    public static void validateExitCarRegistered(Car car, List<Car> parkedCars){
+    public static void ensureIsParked(Car car, List<Car> parkedCars){
         if(!parkedCars.contains(car))
             throw new ParkingGateException("Car is not in the parking area!");
 
@@ -36,5 +38,9 @@ public class ParkingValidator {
     private static void validateNumberplate(String numberplate) {
         if(numberplate == null || numberplate.isBlank())
             throw new ParkingGateException("Car numberplate can't be empty!");
+    }
+
+    private static void requireNonNullCar(Car c){
+        if(c == null) throw new ParkingGateException("Car cannot be null!");
     }
 }

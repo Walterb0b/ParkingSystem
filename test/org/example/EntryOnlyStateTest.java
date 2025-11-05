@@ -16,7 +16,7 @@ class EntryOnlyStateTest {
     @Test
     void canEnter() {
         car = new Car("YX12345");
-        parkingGate.addCar(car);
+        parkingGate.registerEntry(car);
         assertTrue(entryOnlyState.canEnter(car));
 
     }
@@ -25,7 +25,7 @@ class EntryOnlyStateTest {
     @Test
     void canExit() {
         car = new Car("YX12345");
-        parkingGate.addCar(car);
+        parkingGate.registerEntry(car);
         assertFalse(entryOnlyState.canExit(car));
     }
 }
