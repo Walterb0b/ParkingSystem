@@ -11,12 +11,12 @@ public class OpenState implements GateState {
     }
 
     @Override
-    public boolean canEnter(Car car) {
+    public boolean canEnter(Car car, ParkingGate gate) {
         return true;
     }
 
     @Override
-    public boolean canExit(Car car) {
+    public boolean canExit(Car car, ParkingGate gate) {
         return true;
     }
 }

@@ -3,6 +3,7 @@ package main;
 import states.ClosedState;
 import states.EntryOnlyState;
 import states.GateState;
+import util.ParkingGateException;
 import util.ParkingValidator;
 
 import java.util.ArrayList;
@@ -21,11 +22,17 @@ public class ParkingGate {
 
 
     public void registerEntry(Car c){
+        if(!state.canEnter(c, this)){
+            throw new ParkingGateException("Gate is closed for entry right now!");
+        }
         ParkingValidator.validateEntry(c, parkedCars, capacity);
         parkedCars.add(c);
     }
 
     public void registerExit(Car c){
+        if(!state.canExit(c, this)){
+            throw new ParkingGateException("Gate is closed for exiting right now!");
+        }
         ParkingValidator.validateExit(c, parkedCars);
         parkedCars.remove(c);
     }

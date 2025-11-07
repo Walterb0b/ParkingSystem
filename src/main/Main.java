@@ -13,6 +13,12 @@ void main() {
 
     // Start i CLOSED
     System.out.println(gate.getState());
+    try {
+        System.out.println("Registering entry for car1...");
+        gate.registerEntry(car1);
+    } catch (ParkingGateException e){
+        System.out.println("Error: " + e.getMessage());
+    }
 
     // Skift state så biler kan komme ind
     gate.setState(new EntryOnlyState(gate));
