@@ -11,7 +11,7 @@ void main() {
     Car car1 = new Car("AB12345");
     Car car2 = new Car("CD67890");
 
-    // Start i CLOSED
+    // Start in CLOSED
     System.out.println(gate.getState());
     try {
         System.out.println("Registering entry for car1...");
@@ -20,7 +20,7 @@ void main() {
         System.out.println("Error: " + e.getMessage());
     }
 
-    // Skift state så biler kan komme ind
+    // Change states so cars can get in
     gate.setState(new EntryOnlyState(gate));
 
     try {
@@ -31,7 +31,7 @@ void main() {
         System.out.println("Error: " + e.getMessage());
     }
 
-    // Prøv at tage den samme bil ind igen → forventet fejl
+    // Try to enter the same car -> expected error
     try {
         System.out.println("Trying entry again for car1...");
         gate.registerEntry(car1);
@@ -39,7 +39,7 @@ void main() {
         System.out.println("Expected error: " + e.getMessage());
     }
 
-    // Bil skal nu ud → skift til EXIT_ONLY
+    // Cars has to get out -> change state to ExitOnly
     gate.setState(new ExitOnlyState(gate));
 
     try {
@@ -50,7 +50,7 @@ void main() {
         System.out.println("Error: " + e.getMessage());
     }
 
-    // Prøv at sende bil ud der ikke er inde
+    // Try to send out car that's not in the parking space
     try {
         System.out.println("Trying exit for car2...");
         gate.registerExit(car2);
