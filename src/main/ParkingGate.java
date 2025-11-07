@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingGate {
-    private List<Car> parkedCars;
+    private final List<Car> parkedCars;
     private GateState state;
     int capacity;
 
